@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	m "github.com/fadhlimulyana20/restapi-rbac-casbin/middleware"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -11,6 +12,7 @@ import (
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
+	r.Use(m.Auth)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		d, _ := json.Marshal(map[string]string{"hello": "world"})
 		w.Write(d)
